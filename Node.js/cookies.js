@@ -1,0 +1,1 @@
+// A cookie is a small piece of data stored in the user's browser.
