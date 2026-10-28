@@ -9,3 +9,31 @@
 cookie -> stored on user's browser
 session -> stored on the server
 */
+
+const express = require('express');
+const cookieParser = require('cookie-parser');
+
+const app = express();
+
+app.use(cookieParser());
+app.get('/set', (req, res) => {
+    res.cookie('username', 'Rahul', {
+        maxAge: 900000,
+        httpOnly: true
+    });
+
+    res.send('Cookie set');
+});
+app.get('/get', (req, res) => {
+    res.send('Username: ' + req.cookies.username);
+});
+
+app.get('/clear', (req, res) => {
+    res.clearCookie('username');
+    res.send('Cookie cleared');
+});
+
+app.listen(3000, () => {
+    console.log('Server running on http://localhost:3000');
+});
+
